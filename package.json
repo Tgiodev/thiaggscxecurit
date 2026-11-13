@@ -1,0 +1,54 @@
+{
+  "name": "thiaggscxecurit",
+  "displayName": "ThiaggScxecurit",
+  "description": "Detecta puntos débiles de seguridad en tu código y tu web, y te explica cómo solucionarlos.",
+  "version": "0.2.0",
+  "publisher": "thiagg",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "repository": { "type": "git", "url": "https://github.com/Tgiodev/thiaggscxecurit" },
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Linters", "Other"],
+  "keywords": ["security", "seguridad", "xss", "sql injection", "secrets", "electron"],
+  "main": "./extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        { "id": "thiaggscxecurit", "title": "ThiaggScxecurit", "icon": "media/shield.svg" }
+      ]
+    },
+    "views": {
+      "thiaggscxecurit": [
+        { "id": "thiaggscxecurit.findings", "name": "Hallazgos de seguridad" }
+      ]
+    },
+    "commands": [
+      { "command": "thiaggscxecurit.scanFile", "title": "ThiaggScxecurit: Analizar archivo actual" },
+      { "command": "thiaggscxecurit.scanWorkspace", "title": "ThiaggScxecurit: Analizar todo el proyecto", "icon": "$(search)" },
+      { "command": "thiaggscxecurit.analyzeUrl", "title": "ThiaggScxecurit: Analizar cabeceras de seguridad de una URL", "icon": "$(globe)" }
+    ],
+    "menus": {
+      "view/title": [
+        { "command": "thiaggscxecurit.scanWorkspace", "when": "view == thiaggscxecurit.findings", "group": "navigation@1" },
+        { "command": "thiaggscxecurit.analyzeUrl", "when": "view == thiaggscxecurit.findings", "group": "navigation@2" }
+      ]
+    },
+    "configuration": {
+      "title": "ThiaggScxecurit",
+      "properties": {
+        "thiaggscxecurit.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Activar el análisis automático."
+        },
+        "thiaggscxecurit.disabledRules": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "description": "IDs de reglas a desactivar (ej: js-math-random)."
+        }
+      }
+    }
+  }
+}
